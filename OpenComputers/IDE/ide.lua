@@ -75,7 +75,7 @@ function editor.draw ()
     for line in textToDisplay:gmatch("(.-)\n") do
       local lineNumber = i + 1 - view.scrollY;
       gpu.setForeground(0x444444);
-      gpu.set(view.x + 4 - tostring(lineNumber):len(), view.y + i, tostring(lineNumber));	--Line numbers
+      gpu.set(view.x + 4 - tostring(lineNumber):len(), view.y + i, tostring(lineNumber)); --Line numbers
       gpu.setForeground(0xFFFFFF);
       gpu.set(view.x + 6, view.y + i, line);
       i = i + 1;
@@ -308,9 +308,3 @@ end
 
 editor.views[1].document:load(env[1]);
 editor.draw();
-
-for i = 0, 25 do
-  editor.views[1].scrollY = -(i * 2);
-  editor.draw();
-  os.sleep(0.25);
-end
