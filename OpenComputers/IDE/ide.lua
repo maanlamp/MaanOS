@@ -5,6 +5,7 @@ function update ()
 	for chunk in internet.request("https://raw.githubusercontent.com/maanlamp/MaanOS/master/OpenComputers/IDE/ide.lua") do
 		file:write(chunk);
 	end
+	file:close();
 end
 
 update();
