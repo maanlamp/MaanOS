@@ -3,7 +3,7 @@ function update ()
 	local internet = require("internet");
 	local file = io.open("/maanos/programs/ide.lua", "w");
 	for chunk in internet.request("https://raw.githubusercontent.com/maanlamp/MaanOS/master/OpenComputers/IDE/ide.lua") do
-		file:write(newFile..chunk);
+		file:write(chunk);
 	end
 end
 
