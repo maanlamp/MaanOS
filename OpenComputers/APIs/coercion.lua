@@ -5,4 +5,4 @@ function coercion.toboolean (value)
 	return not not value;
 end
 
-return coercion
+return coercion;
