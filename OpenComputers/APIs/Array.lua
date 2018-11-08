@@ -67,7 +67,7 @@ function Array.from (_table)
 	end
 	
 	function Array:first ()
-		return self[1];
+		return self:slice(1, count or 1);
 	end
 	
 	function Array:shift ()
