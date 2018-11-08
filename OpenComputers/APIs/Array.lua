@@ -128,6 +128,7 @@ end
 function Array:slice (from, to)
 	local returnArray = Array.from{};
 	if from < 0 then from = self:length() + from + 1 end;
+	if not to then to = self:length() end;
 	if to < 0 then to = self:length() + to + 1 end;
 	for i = from, to do
 		returnArray:push(self[i]);
