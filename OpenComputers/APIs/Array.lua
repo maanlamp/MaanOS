@@ -66,8 +66,8 @@ function Array:first (count)
 	return self:slice(1, count or 1);
 end
 
-function Array:last ()
-	return self[self:length()];
+function Array:last (count)
+	return self:slice(-(count or 1), self:length());
 end
 
 function Array:shift ()
