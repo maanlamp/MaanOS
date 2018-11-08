@@ -62,12 +62,12 @@ function Array.from (_table)
 		return table.remove(self);
 	end
 	
+	function Array:first (count)
+		return self:slice(1, count or 1);
+	end
+
 	function Array:last ()
 		return self[self:length()];
-	end
-	
-	function Array:first ()
-		return self[1];
 	end
 	
 	function Array:shift ()
