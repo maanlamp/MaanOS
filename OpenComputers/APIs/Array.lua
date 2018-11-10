@@ -6,11 +6,11 @@ function Array:clone ()
 	if (table.unpack) then
 		return Array.from{ table.unpack(self) };
 	else
-		local clone;
-		for i, value in ipairs(self) do
+		local clone = {} ;
+		self:forEach(function (value, i)
 			clone[i] = value;
-		end
-		return clone;
+		end);
+		return Array.from(clone);
 	end
 end
 
