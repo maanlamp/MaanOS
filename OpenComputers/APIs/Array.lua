@@ -43,11 +43,11 @@ function Array:toString ()
 end
 
 function Array:map (lambda)
-	local returnArray = self:clone();
-	for i, value in ipairs(returnArray) do
-		returnArray[i] = lambda(value, i, self);
-	end
-	return returnArray;
+	local clone = self:clone();
+	clone:forEach(function (value, i, clone)
+		clone[i] = lambda(value, i, self);
+	end);
+	return clone;
 end
 
 function Array:length ()
