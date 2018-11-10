@@ -3,7 +3,15 @@ Array.__index = Array; --MUI IMPORTANTE!! <- Als array geen gecallde method heef
 Array.__tostring = function (self) return self:toString() end;
 
 function Array:clone ()
-	return Array.from{ table.unpack(self) };
+	if (table.unpack) then
+		return Array.from{ table.unpack(self) };
+	else
+		local clone;
+		for i, value in ipairs(self) do
+			clone[i] = value;
+		end
+		return clone;
+	end
 end
 
 function Array.isArray (value)
