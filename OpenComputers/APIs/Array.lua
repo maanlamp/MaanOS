@@ -41,7 +41,7 @@ function Array:toString ()
 			returnString = returnString..stringifiedValue..", ";
 		end
 	end
-	return (returnString.."]"):gsub(", ]", " ]");
+	return ({(returnString.."]"):gsub(", ]", " ]")})[1];
 end
 
 function Array:map (lambda)
