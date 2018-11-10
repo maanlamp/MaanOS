@@ -35,6 +35,7 @@ function Array:toString ()
 		if type(self[i]) == "table" then
 			returnString = returnString..tostring(self[i])..", ";
 		else
+			-- TOFIX: string.format errors when self[i] == nil.
 			returnString = returnString..string.format("%q", self[i])..", ";
 		end
 	end
