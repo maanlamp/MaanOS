@@ -35,8 +35,10 @@ function Array:toString ()
 		if type(self[i]) == "table" then
 			returnString = returnString..tostring(self[i])..", ";
 		else
-			-- TOFIX: string.format errors when self[i] == nil.
-			returnString = returnString..string.format("%q", self[i])..", ";
+			local checkForNil = (self[i] == nil) and "nil";
+			local checkForString = (type(self[i]) == "string") and string.format("%q", self[i]);
+			local stringifiedValue = checkForNil or checkForString or self[i];
+			returnString = returnString..stringifiedValue..", ";
 		end
 	end
 	return (returnString.."]"):gsub(", ]", " ]");
