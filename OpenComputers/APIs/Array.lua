@@ -92,7 +92,6 @@ function Array:unshift (value)
 end
 
 function Array:every (lambda)
-	--try to use forEach?
 	for i, value in ipairs(self) do
 		if not lambda(value, i, self) then return false end;
 	end
@@ -100,7 +99,6 @@ function Array:every (lambda)
 end
 
 function Array:some (lambda)
-	--try to use forEach?
 	for i, value in ipairs(self) do
 		if lambda(value, i, self) then return true end;
 	end
