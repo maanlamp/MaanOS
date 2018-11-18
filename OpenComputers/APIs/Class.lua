@@ -28,7 +28,7 @@ class Object {
 		this.baz = "quux";
 		this.test = {
 			hi = 3;
-			test = Class.new("Thing");
+			test = {};
 		};
 	}
 
