@@ -15,10 +15,10 @@ local env = {...};
 local term = require("term");
 local shell = require("shell");
 local event = require("event");
+local unicode = require("unicode");
+local Array = require("../api/Array");
 local component = require("component");
 local gpu = component.gpu;
-local Array = require("Array");
-local unicode = require("unicode");
 
 function vw ()
   local w, h = gpu.getResolution();
