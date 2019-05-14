@@ -47,4 +47,4 @@ function Inspector.inspect (toInspect, maxDepth, currentDepth)
 	return str:gsub(",$", "\n")..("  "):rep(currentDepth).."}";
 end
 
-return inspect;
+return Inspector;

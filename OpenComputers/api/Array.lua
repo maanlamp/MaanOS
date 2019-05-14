@@ -1,18 +1,4 @@
 local Array = {};
-Array.__index = Array; --MUI IMPORTANTE!! <- Als array geen gecallde method heeft, zoek in de 'prototype'/metatable
-Array.__tostring = function (self) return self:toString() end;
-
-function Array:clone ()
-	if (table.unpack) then
-		return Array.from{ table.unpack(self) };
-	else
-		local clone = {} ;
-		self:forEach(function (value, i)
-			clone[i] = value;
-		end);
-		return Array.from(clone);
-	end
-end
 
 function Array.isArray (value)
 	return getmetatable(value) == Array;
@@ -29,15 +15,67 @@ function Array.from (_table)
 	return tmp;
 end
 
+Array._MEMBERS = Array.from{
+	length = 0;
+};
+
+function Array:includes (value)
+	return self:some(function(val) return val == value end);
+end
+
+function Array:__index (key) --Get
+	if self._MEMBERS:includes(key) then
+		return (type(self._MEMBERS[key]) == "function")
+			and self._MEMBERS[key](self)
+			or self._MEMBERS[key];
+	else
+		return Array; --MUI IMPORTANTE!! <- Als array geen gecallde method heeft, zoek in de 'prototype'/metatable
+	end
+end;
+
+function Array:__newindex (key, value) --Set
+	if self._MEMBERS:includes(key) then
+		self._MEMBERS[key] = value;
+	else
+		return Array; --MUI IMPORTANTE!! <- Als array geen gecallde method heeft, zoek in de 'prototype'/metatable
+	end
+end;
+
+function Array:__tostring ()
+	return self:toString()
+end;
+
+function Array:forEach (lambda)
+	for i, value in ipairs(self) do
+		lambda(value, i, self);
+	end
+end
+
+function Array:clone ()
+	if (table.unpack) then
+		return Array.from{ table.unpack(self) };
+	else
+		local clone = {} ;
+		self:forEach(function (value, i)
+			clone[i] = value;
+		end);
+		return Array.from(clone);
+	end
+end
+
 function Array:toString ()
 	local returnString = "[ ";
 	for i = 1, self:length() do
 		if type(self[i]) == "table" then
 			returnString = returnString..tostring(self[i])..", ";
 		else
-			local checkForNil = (self[i] == nil) and "nil";
-			local checkForString = (type(self[i]) == "string") and string.format("%q", self[i]);
-			local stringifiedValue = checkForNil or checkForString or self[i];
+			local checkForNil = (self[i] == nil)
+				and "nil";
+			local checkForString = (type(self[i]) == "string")
+				and string.format("%q", self[i]);
+			local stringifiedValue = checkForNil
+				or checkForString
+				or self[i];
 			returnString = returnString..stringifiedValue..", ";
 		end
 	end
@@ -55,12 +93,6 @@ end
 function Array:length ()
 	return #self;
 	--return self:reduce(function (total) return total + 1 end, 0);
-end
-
-function Array:forEach (lambda)
-	for i, value in ipairs(self) do
-		lambda(value, i, self);
-	end
 end
 
 function Array:push (value)
@@ -157,10 +189,6 @@ function Array:clear ()
 	return self:fill(nil);
 end
 
-function Array:includes (value)
-	return self:some(function(val) return val == value end);
-end
-
 function Array:sum ()
 	return self:reduce(function (acc, val) return acc+val end);
 end
@@ -182,6 +210,20 @@ function Array:median ()
 	else
 		return (sortedArray[half-1] + sortedArray[half]) / 2;
 	end
+end
+
+function Array:find (lambda)
+	for i, val in ipairs(self) do
+		if lambda(val, i, self) == true then return self[i] end;
+	end
+	-- UNTESTED!!!
+end
+
+function Array:findIndex ()
+	for i, val in ipairs(self) do
+		if lambda(val, i, self) == true then return i end;
+	end
+	-- UNTESTED!!!
 end
 
 --METAMETHODS

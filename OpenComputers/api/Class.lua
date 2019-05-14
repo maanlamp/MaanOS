@@ -1,11 +1,11 @@
-local inspect = require("../Inspect.lua");
+local Inspector = require("../Inspect.lua");
 
 local Class = {
 	private = {
 		className = "Class";
 	};
 	public = {};
-	toString = inspect;
+	toString = Inspector.inspect;
 };
 Class.__index = Class;
 

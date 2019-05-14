@@ -1,8 +1,8 @@
-local coercion = {};
+local Coercion = {};
 
-function coercion.toboolean (value)
+function Coercion.toboolean (value)
 	if value == true or value == false then return value end;
 	return not not value;
 end
 
-return coercion;
+return Coercion;
