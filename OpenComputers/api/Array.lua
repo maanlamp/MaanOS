@@ -219,7 +219,7 @@ function Array:find (lambda)
 	-- UNTESTED!!!
 end
 
-function Array:findIndex ()
+function Array:findIndex (lambda)
 	for i, val in ipairs(self) do
 		if lambda(val, i, self) == true then return i end;
 	end
@@ -261,7 +261,7 @@ function Array.__mod (this, other)
 	--do something
 end
 function Array.__unm (this, other)
-	return this
+	--do something
 end
 function Array.__concat (this, other)
 	--if array push other to this then :toString()
