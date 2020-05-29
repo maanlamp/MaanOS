@@ -82,10 +82,10 @@ local function run (kernelFile, ...)
 	end
 
 	-- 4. try call loaded kernel
-	-- TODO: How and where could we allow
-	--       updating of the kernel here?
 	local _, err = try(kernel);
 	if err then crash(err, true) end
+	-- TODO: How and where could we allow
+	--       updating of the kernel here?
 
 	crash("Kernel somehow returned? "..tostring(_), true);
 end
